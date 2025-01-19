@@ -47,7 +47,7 @@ public class Post {
     @ManyToMany
     @JoinTable(
             name = "post_tags",
-            joinColumns = @JoinColumn(name = "post_id"),
+            joinColumns = @JoinColumn(name="post_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     private Set<Tag> tags = new HashSet<>();
@@ -74,7 +74,6 @@ public class Post {
     @PrePersist
     protected void onCreate() {
         LocalDateTime now = LocalDateTime.now();
-
         this.createdAt = now;
         this.updatedAt = now;
     }
