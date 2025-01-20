@@ -1,7 +1,7 @@
 package com.fpoirier.blog.mappers;
 
 import com.fpoirier.blog.domain.PostStatus;
-import com.fpoirier.blog.domain.dtos.TagResponse;
+import com.fpoirier.blog.domain.dtos.TagDto;
 import com.fpoirier.blog.domain.entities.Post;
 import com.fpoirier.blog.domain.entities.Tag;
 import org.mapstruct.Mapper;
@@ -15,7 +15,7 @@ import java.util.Set;
 public interface TagMapper {
 
     @Mapping(target = "postCount", source = "posts", qualifiedByName = "calculatePostCount")
-    TagResponse toTagResponse(Tag tag);
+    TagDto toTagResponse(Tag tag);
 
     @Named("calculatePostCount")
     default Integer calculatePostCount(Set<Post> posts) {

@@ -3,9 +3,11 @@ package com.fpoirier.blog.services.impl;
 import com.fpoirier.blog.domain.entities.Tag;
 import com.fpoirier.blog.repositories.TagRepository;
 import com.fpoirier.blog.services.TagService;
-import jakarta.transaction.Transactional;
+import jakarta.persistence.EntityNotFoundException;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -60,5 +62,11 @@ public class TagServiceImpl implements TagService {
             }
             tagRepository.deleteById(id);
         });
+    }
+
+    @Override
+    public Tag getTagById(UUID id) {
+        return tagRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Tag not found with id: " + id));
     }
 }
